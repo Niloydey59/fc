@@ -1,6 +1,7 @@
 #include "GameManager.h"
 #include "../globals/Globals.h"
 #include "../physics/Physics.h"
+#include "../ball/Ball.h"
 #include <GL/freeglut.h>
 
 void initLevel() {
@@ -27,6 +28,7 @@ void resetGame() {
     cameraPitch = 22.0f;
     cameraDistance = 15.0f;
 
+    initBall();
     initLevel();
 }
 
@@ -45,6 +47,7 @@ void updateGame(float dt) {
     }
 
     updatePlayer(dt);
+    updateBall();
 
     if (specialKeys[GLUT_KEY_UP]) {
         cameraPitch += 45.0f * dt;

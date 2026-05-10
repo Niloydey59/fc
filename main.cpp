@@ -8,6 +8,7 @@
 #include "camera/Camera.h"
 #include "input/Input.h"
 #include "stadium/Stadium.h"
+#include "ball/Ball.h"
 
 void display() {
     glClearColor(0.02f, 0.025f, 0.045f, 1.0f);
@@ -24,6 +25,7 @@ void display() {
     drawStadium();
     drawLightPoles();
     drawPlayer();
+    drawBall();
     drawHUD();
 
     glutSwapBuffers();
