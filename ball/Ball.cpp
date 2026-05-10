@@ -6,7 +6,7 @@
 Ball ball;
 
 void initBall() {
-    ball.pos      = {0.0f, 0.0f, 0.0f};  // center of field
+    ball.pos      = {0.0f, 0.4f, 0.0f};  // center of field
     ball.radius   = 0.4f;
     ball.attached = false;
 }

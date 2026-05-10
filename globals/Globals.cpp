@@ -13,7 +13,8 @@ int lastMouseY = 0;
 
 float arenaHalfSize = 32.0f;
 
-Vec3 playerPos = {0.0f, 0.0f, -25.0f};
+Vec3 playerStartPos = {0.0f, 0.0f, 15.0f};
+Vec3 playerPos = playerStartPos;
 
 float playerYaw = 0.0f;
 float playerRadius = 0.75f;

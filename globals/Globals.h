@@ -17,6 +17,7 @@ extern int lastMouseY;
 
 extern float arenaHalfSize;
 
+extern Vec3 playerStartPos;
 extern Vec3 playerPos;
 
 extern float playerYaw;
