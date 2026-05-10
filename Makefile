@@ -7,6 +7,10 @@ SRCS = main.cpp \
        globals/Globals.cpp \
        physics/Physics.cpp \
        renderer/Renderer.cpp \
+       renderer/DrawUtils.cpp \
+       renderer/HUD.cpp \
+       renderer/Lighting.cpp \
+       player/Player.cpp \
        camera/Camera.cpp \
        input/Input.cpp \
        game_manager/GameManager.cpp \

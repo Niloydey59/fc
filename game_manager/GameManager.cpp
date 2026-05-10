@@ -1,6 +1,6 @@
 #include "GameManager.h"
 #include "../globals/Globals.h"
-#include "../physics/Physics.h"
+#include "../player/Player.h"
 #include "../ball/Ball.h"
 #include <GL/freeglut.h>
 

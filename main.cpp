@@ -9,6 +9,7 @@
 #include "input/Input.h"
 #include "stadium/Stadium.h"
 #include "ball/Ball.h"
+#include "player/Player.h"
 
 void display() {
     glClearColor(0.02f, 0.025f, 0.045f, 1.0f);

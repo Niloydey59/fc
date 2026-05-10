@@ -1,5 +1,6 @@
 #include "Stadium.h"
 #include "../math/MathUtils.h"
+#include "../renderer/DrawUtils.h"
 #include <GL/freeglut.h>
 #include <cmath>
 
@@ -236,10 +237,48 @@ static void drawGoal(float goalLineZ, float sign) {
     glEnable(GL_LIGHTING);
 }
 
-// ── Public entry point ────────────────────────────────────────
+// ── Public entry points ──────────────────────────────────────
 void drawStadium() {
     drawGrass();
     drawFieldLines();
-    drawGoal(-FL, +1.0f);   // north goal  (opens toward centre)
-    drawGoal( FL, -1.0f);   // south goal  (opens toward centre)
+    drawGoal(-FL, +1.0f);
+    drawGoal( FL, -1.0f);
+}
+
+static void drawFloodlight(float x, float z) {
+    const float POLE_H  = 18.0f;
+    const float ARM_LEN = 3.0f;
+
+    glPushMatrix();
+    glTranslatef(x, 0.0f, z);
+
+    setMaterial(0.35f, 0.35f, 0.38f, 30.0f);
+    glPushMatrix();
+    glRotatef(-90.0f, 1, 0, 0);
+    drawCylinder(0.25f, POLE_H, 12);
+    glPopMatrix();
+
+    glTranslatef(0.0f, POLE_H, 0.0f);
+
+    setMaterial(0.35f, 0.35f, 0.38f, 30.0f);
+    glPushMatrix();
+    drawCubeScaled(ARM_LEN * 2.0f, 0.25f, 0.25f);
+    glPopMatrix();
+
+    glDisable(GL_LIGHTING);
+    glColor3f(1.0f, 0.95f, 0.75f);
+    glPushMatrix(); glTranslatef(-ARM_LEN, -0.4f, 0.0f); glutSolidSphere(0.45f, 10, 10); glPopMatrix();
+    glPushMatrix(); glTranslatef( ARM_LEN, -0.4f, 0.0f); glutSolidSphere(0.45f, 10, 10); glPopMatrix();
+    glEnable(GL_LIGHTING);
+
+    glPopMatrix();
+}
+
+void drawLightPoles() {
+    float ox = FIELD_HALF_WIDTH  + 5.0f;
+    float oz = FIELD_HALF_LENGTH + 5.0f;
+    drawFloodlight(-ox, -oz);
+    drawFloodlight( ox, -oz);
+    drawFloodlight(-ox,  oz);
+    drawFloodlight( ox,  oz);
 }
