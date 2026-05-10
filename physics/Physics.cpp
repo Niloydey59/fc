@@ -1,6 +1,7 @@
 #include "Physics.h"
 #include "../globals/Globals.h"
 #include "../game_manager/GameManager.h"
+#include "../stadium/Stadium.h"
 #include <GL/freeglut.h>
 #include <cmath>
 
@@ -85,9 +86,9 @@ void updatePlayer(float dt) {
         playerPos.z += moveZ * moveSpeed * dt;
     }
 
-    // Keep player inside arena
-    playerPos.x = clampValue(playerPos.x, -arenaHalfSize + 1.2f, arenaHalfSize - 1.2f);
-    playerPos.z = clampValue(playerPos.z, -arenaHalfSize + 1.2f, arenaHalfSize - 1.2f);
+    // Keep player inside field
+    playerPos.x = clampValue(playerPos.x, -FIELD_HALF_WIDTH  + 1.2f, FIELD_HALF_WIDTH  - 1.2f);
+    playerPos.z = clampValue(playerPos.z, -FIELD_HALF_LENGTH + 1.2f, FIELD_HALF_LENGTH - 1.2f);
 
     // Jump
     if (keys[' '] && !isJumping) {

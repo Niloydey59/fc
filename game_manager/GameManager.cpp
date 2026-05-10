@@ -20,7 +20,7 @@ void initLevel() {
 }
 
 void resetGame() {
-    playerPos = {0.0f, 0.0f, -25.0f};
+    playerPos = {0.0f, 0.0f, 0.0f};
     playerYaw = 0.0f;
 
     isJumping = false;
@@ -43,7 +43,7 @@ void resetGame() {
 }
 
 void respawnPlayer() {
-    playerPos = {0.0f, 0.0f, -25.0f};
+    playerPos = {0.0f, 0.0f, 0.0f};
     isJumping = false;
     jumpVelocity = 0.0f;
 }

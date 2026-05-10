@@ -9,7 +9,8 @@ SRCS = main.cpp \
        renderer/Renderer.cpp \
        camera/Camera.cpp \
        input/Input.cpp \
-       game_manager/GameManager.cpp
+       game_manager/GameManager.cpp \
+       stadium/Stadium.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 

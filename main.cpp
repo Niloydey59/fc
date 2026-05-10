@@ -7,6 +7,7 @@
 #include "game_manager/GameManager.h"
 #include "camera/Camera.h"
 #include "input/Input.h"
+#include "stadium/Stadium.h"
 
 void display() {
     glClearColor(0.02f, 0.025f, 0.045f, 1.0f);
@@ -20,9 +21,7 @@ void display() {
     updateCamera();
     setupLighting();
 
-    drawFloor();
-    drawWalls();
-    drawDecorations();
+    drawStadium();
     drawLightPoles();
     drawPlayer();
     drawHUD();
