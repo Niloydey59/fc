@@ -3,9 +3,6 @@
 
 #include "../math/MathUtils.h"
 
-struct Decoration {
-    Vec3 pos;
-    float scale;
-};
+// Add new game entity structs here as the game grows.
 
 #endif // ENTITIES_H

@@ -39,6 +39,4 @@ extern float cameraYawOffset;
 extern float cameraPitch;
 extern float cameraDistance;
 
-extern std::vector<Decoration> trees;
-
 #endif // GLOBALS_H

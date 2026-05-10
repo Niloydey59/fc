@@ -1,6 +1,6 @@
 #include "Renderer.h"
 #include "../globals/Globals.h"
-#include "../physics/Physics.h"
+#include "../stadium/Stadium.h"
 #include <GL/freeglut.h>
 #include <cmath>
 #include <sstream>
@@ -113,35 +113,6 @@ void drawWalls() {
     glEnable(GL_LIGHTING);
 }
 
-void drawTree(const Decoration& t) {
-    glPushMatrix();
-    glTranslatef(t.pos.x, 0.0f, t.pos.z);
-    glScalef(t.scale, t.scale, t.scale);
-
-    setMaterial(0.42f, 0.25f, 0.10f, 15.0f);
-
-    glPushMatrix();
-    glRotatef(-90, 1, 0, 0);
-    drawCylinder(0.18f, 1.8f, 16);
-    glPopMatrix();
-
-    setMaterial(0.08f, 0.45f, 0.18f, 18.0f);
-
-    glPushMatrix();
-    glTranslatef(0, 2.4f, 0);
-    glutSolidSphere(0.95, 18, 18);
-    glTranslatef(0, 0.65f, 0);
-    glutSolidSphere(0.65, 18, 18);
-    glPopMatrix();
-
-    glPopMatrix();
-}
-
-void drawDecorations() {
-    for (const auto& t : trees) {
-        drawTree(t);
-    }
-}
 
 void drawPlayer() {
     glPushMatrix();
@@ -201,42 +172,55 @@ void drawPlayer() {
 }
 
 
+// Draw a single floodlight tower at (x, z)
+static void drawFloodlight(float x, float z) {
+    const float POLE_H  = 18.0f;
+    const float ARM_LEN = 3.0f;
+
+    glPushMatrix();
+    glTranslatef(x, 0.0f, z);
+
+    // Pole
+    setMaterial(0.35f, 0.35f, 0.38f, 30.0f);
+    glPushMatrix();
+    glRotatef(-90.0f, 1, 0, 0);
+    drawCylinder(0.25f, POLE_H, 12);
+    glPopMatrix();
+
+    // Move to pole top
+    glTranslatef(0.0f, POLE_H, 0.0f);
+
+    // Horizontal arm
+    setMaterial(0.35f, 0.35f, 0.38f, 30.0f);
+    glPushMatrix();
+    drawCubeScaled(ARM_LEN * 2.0f, 0.25f, 0.25f);
+    glPopMatrix();
+
+    // Two lamp heads on arm ends
+    glDisable(GL_LIGHTING);
+    glColor3f(1.0f, 0.95f, 0.75f);
+    glPushMatrix();
+    glTranslatef(-ARM_LEN, -0.4f, 0.0f);
+    glutSolidSphere(0.45f, 10, 10);
+    glPopMatrix();
+    glPushMatrix();
+    glTranslatef( ARM_LEN, -0.4f, 0.0f);
+    glutSolidSphere(0.45f, 10, 10);
+    glPopMatrix();
+    glEnable(GL_LIGHTING);
+
+    glPopMatrix();
+}
+
 void drawLightPoles() {
-    for (int i = -24; i <= 24; i += 12) {
-        for (int side = 0; side < 2; side++) {
-            float x = (side == 0) ? -30.0f : 30.0f;
-            float z = (float)i;
+    // 4 corner floodlight towers just outside the field
+    float ox = FIELD_HALF_WIDTH  + 5.0f;
+    float oz = FIELD_HALF_LENGTH + 5.0f;
 
-            glPushMatrix();
-            glTranslatef(x, 0, z);
-
-            setMaterial(0.18f, 0.18f, 0.20f, 25.0f);
-
-            glPushMatrix();
-            glRotatef(-90, 1, 0, 0);
-            drawCylinder(0.08f, 4.5f, 14);
-            glPopMatrix();
-
-            glPushMatrix();
-            glTranslatef(0, 4.6f, 0);
-
-            glDisable(GL_LIGHTING);
-            glColor3f(0.2f, 0.8f, 1.0f);
-            glutSolidSphere(0.18, 16, 16);
-
-            glEnable(GL_BLEND);
-            glBlendFunc(GL_SRC_ALPHA, GL_ONE);
-            glColor4f(0.2f, 0.8f, 1.0f, 0.20f);
-            glutSolidSphere(0.75, 16, 16);
-            glDisable(GL_BLEND);
-
-            glEnable(GL_LIGHTING);
-
-            glPopMatrix();
-
-            glPopMatrix();
-        }
-    }
+    drawFloodlight(-ox, -oz);
+    drawFloodlight( ox, -oz);
+    drawFloodlight(-ox,  oz);
+    drawFloodlight( ox,  oz);
 }
 
 void setupLighting() {

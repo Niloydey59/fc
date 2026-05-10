@@ -42,9 +42,27 @@ static void arcXZ(float cx, float cz, float r, float a1, float a2, float y, int 
     glEnd();
 }
 
+// How far grass extends past the field boundary lines
+static const float GRASS_EXT = 10.0f;
+
 // ── Grass with alternating stripes ───────────────────────────
 static void drawGrass() {
     glDisable(GL_LIGHTING);
+
+    float GW = FW + GRASS_EXT;   // grass half-width
+    float GL = FL + GRASS_EXT;   // grass half-length
+
+    // 1. Flat dark-green base for the full outer grass area
+    glColor3f(0.15f, 0.45f, 0.15f);
+    glBegin(GL_QUADS);
+        glNormal3f(0, 1, 0);
+        glVertex3f(-GW, 0.0f, -GL);
+        glVertex3f( GW, 0.0f, -GL);
+        glVertex3f( GW, 0.0f,  GL);
+        glVertex3f(-GW, 0.0f,  GL);
+    glEnd();
+
+    // 2. Alternating stripes inside the field boundary only
     const int STRIPES = 14;
     float sw = (FL * 2.0f) / STRIPES;
 
@@ -56,14 +74,16 @@ static void drawGrass() {
 
         glBegin(GL_QUADS);
             glNormal3f(0, 1, 0);
-            glVertex3f(-FW, 0.0f, z0);
-            glVertex3f( FW, 0.0f, z0);
-            glVertex3f( FW, 0.0f, z1);
-            glVertex3f(-FW, 0.0f, z1);
+            glVertex3f(-FW, 0.01f, z0);
+            glVertex3f( FW, 0.01f, z0);
+            glVertex3f( FW, 0.01f, z1);
+            glVertex3f(-FW, 0.01f, z1);
         glEnd();
     }
+
     glEnable(GL_LIGHTING);
 }
+
 
 // ── Field lines ──────────────────────────────────────────────
 static void drawFieldLines() {

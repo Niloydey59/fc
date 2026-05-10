@@ -4,19 +4,7 @@
 #include <GL/freeglut.h>
 
 void initLevel() {
-    trees.clear();
-
-    for (int i = 0; i < 34; i++) {
-        float x = (i % 2 == 0) ? -38.0f : 38.0f;
-        float z = -30.0f + i * 2.0f;
-        trees.push_back({{x, 0.0f, z}, 0.9f + (i % 4) * 0.15f});
-    }
-
-    for (int i = 0; i < 22; i++) {
-        float z = (i % 2 == 0) ? -38.0f : 38.0f;
-        float x = -28.0f + i * 2.8f;
-        trees.push_back({{x, 0.0f, z}, 0.8f + (i % 3) * 0.2f});
-    }
+    // Populate level entities here (ball, AI players, etc.)
 }
 
 void resetGame() {

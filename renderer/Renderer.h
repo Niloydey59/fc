@@ -13,8 +13,6 @@ void setMaterial(float r, float g, float b, float shininess = 35.0f);
 void setupLighting();
 void drawFloor();
 void drawWalls();
-void drawTree(const Decoration& t);
-void drawDecorations();
 void drawPlayer();
 void drawLightPoles();
 void drawHUD();
