@@ -23,6 +23,8 @@ float jumpVelocity = 0.0f;
 
 int lives = 3;
 
+int homeScore = 0;
+int awayScore = 0;
 float gameTime = 0.0f;
 float globalTime = 0.0f;
 

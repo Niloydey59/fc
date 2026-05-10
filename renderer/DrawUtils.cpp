@@ -1,18 +1,20 @@
 #include "DrawUtils.h"
 #include <GL/freeglut.h>
 
-void drawBitmapText2D(float x, float y, const std::string& text) {
+void drawBitmapText2D(float x, float y, const std::string& text, void* font) {
+    if (!font) font = GLUT_BITMAP_HELVETICA_18;
     glRasterPos2f(x, y);
     for (char c : text)
-        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_12, c);
+        glutBitmapCharacter(font, c);
 }
 
-void drawBitmapText3D(const std::string& text, float x, float y, float z) {
+void drawBitmapText3D(const std::string& text, float x, float y, float z, void* font) {
+    if (!font) font = GLUT_BITMAP_HELVETICA_18;
     glDisable(GL_LIGHTING);
     glColor3f(1.0f, 1.0f, 1.0f);
     glRasterPos3f(x, y, z);
     for (char c : text)
-        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_12, c);
+        glutBitmapCharacter(font, c);
     glEnable(GL_LIGHTING);
 }
 

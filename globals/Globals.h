@@ -27,6 +27,8 @@ extern float jumpVelocity;
 
 extern int lives;
 
+extern int homeScore;
+extern int awayScore;
 extern float gameTime;
 extern float globalTime;
 
