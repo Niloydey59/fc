@@ -15,7 +15,7 @@ void updateBall() {
     if (ball.attached) {
         // Keep ball just in front of the player on the ground
         float yaw  = degToRad(playerYaw);
-        float fwdX = std::sin(yaw);
+        float fwdX = -std::sin(yaw);
         float fwdZ = -std::cos(yaw);
         float offset = playerRadius + ball.radius + 0.05f;
 
