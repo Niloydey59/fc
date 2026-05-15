@@ -11,7 +11,7 @@ void initBall() {
     ball.attached = false;
 }
 
-void updateBall() {
+void updateBall() { // dynamic enity, updated through game manager
     if (ball.attached) {
         // Keep ball just in front of the player on the ground
         float yaw  = degToRad(playerYaw);

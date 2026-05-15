@@ -44,7 +44,7 @@ void updateEntities(float dt) {
     // future: updateAIPlayers(dt), updateObstacles(dt), etc.
 }
 
-void updateCamera(float dt) {
+void updateCameraPitch(float dt) {
     if (specialKeys[GLUT_KEY_UP])   cameraPitch += 45.0f * dt;
     if (specialKeys[GLUT_KEY_DOWN]) cameraPitch -= 45.0f * dt;
     cameraPitch = clampValue(cameraPitch, -5.0f, 70.0f);
@@ -59,5 +59,5 @@ void updateGame(float dt) {
     }
 
     updateEntities(dt);
-    updateCamera(dt);
+    updateCameraPitch(dt);
 }
