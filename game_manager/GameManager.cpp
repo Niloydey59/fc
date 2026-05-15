@@ -6,6 +6,7 @@
 
 void initLevel() {
     // Populate level entities here (ball, AI players, etc.)
+    initBall();
 }
 
 void resetGame() {
@@ -28,7 +29,6 @@ void resetGame() {
     cameraPitch = 22.0f;
     cameraDistance = 15.0f;
 
-    initBall();
     initLevel();
 }
 
@@ -36,6 +36,18 @@ void respawnPlayer() {
     playerPos = playerStartPos;
     isJumping = false;
     jumpVelocity = 0.0f;
+}
+
+void updateEntities(float dt) {
+    updatePlayer(dt);
+    updateBall();
+    // future: updateAIPlayers(dt), updateObstacles(dt), etc.
+}
+
+void updateCamera(float dt) {
+    if (specialKeys[GLUT_KEY_UP])   cameraPitch += 45.0f * dt;
+    if (specialKeys[GLUT_KEY_DOWN]) cameraPitch -= 45.0f * dt;
+    cameraPitch = clampValue(cameraPitch, -5.0f, 70.0f);
 }
 
 void updateGame(float dt) {
@@ -46,16 +58,6 @@ void updateGame(float dt) {
         globalTime += dt * 0.35f;
     }
 
-    updatePlayer(dt);
-    updateBall();
-
-    if (specialKeys[GLUT_KEY_UP]) {
-        cameraPitch += 45.0f * dt;
-    }
-
-    if (specialKeys[GLUT_KEY_DOWN]) {
-        cameraPitch -= 45.0f * dt;
-    }
-
-    cameraPitch = clampValue(cameraPitch, -5.0f, 70.0f);
+    updateEntities(dt);
+    updateCamera(dt);
 }
