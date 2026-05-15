@@ -40,7 +40,7 @@ void respawnPlayer() {
 
 void updateEntities(float dt) {
     updatePlayer(dt);
-    updateBall();
+    updateBall(dt);
     // future: updateAIPlayers(dt), updateObstacles(dt), etc.
 }
 

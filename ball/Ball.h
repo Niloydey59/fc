@@ -5,6 +5,7 @@
 
 struct Ball {
     Vec3  pos;
+    Vec3  vel;
     float radius;
     bool  attached;   // true = stuck to front of player
 };
@@ -12,7 +13,7 @@ struct Ball {
 extern Ball ball;
 
 void initBall();
-void updateBall();
+void updateBall(float dt);
 void drawBall();
 
 #endif // BALL_H

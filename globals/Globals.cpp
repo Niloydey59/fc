@@ -37,3 +37,5 @@ int cameraMode = 0; // 0 = third person, 1 = top view, 2 = first person
 float cameraYawOffset = 0.0f;
 float cameraPitch = 22.0f;
 float cameraDistance = 15.0f;
+
+float kickCharge = 0.0f;

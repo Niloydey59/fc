@@ -42,4 +42,6 @@ extern float cameraYawOffset;
 extern float cameraPitch;
 extern float cameraDistance;
 
+extern float kickCharge;
+
 #endif // GLOBALS_H
