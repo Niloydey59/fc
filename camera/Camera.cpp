@@ -7,7 +7,7 @@ void updateCamera() {
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
-    if (cameraMode == 0) {
+    if (cameraMode == 0) { // third person
         float yaw = degToRad(playerYaw + cameraYawOffset);
         float pitch = degToRad(cameraPitch);
 
@@ -21,14 +21,14 @@ void updateCamera() {
             0, 1, 0
         );
     }
-    else if (cameraMode == 1) {
+    else if (cameraMode == 1) { // top view
         gluLookAt(
             playerPos.x, 48.0f, playerPos.z + 1.0f,
             playerPos.x, 0.0f, playerPos.z,
             0, 0, -1
         );
     }
-    else {
+    else { // first person(2)
         float yaw = degToRad(playerYaw);
 
         float eyeX = playerPos.x;

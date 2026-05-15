@@ -16,7 +16,7 @@ void updatePlayer(float dt) {
     if (specialKeys[GLUT_KEY_RIGHT]) playerYaw -= turnSpeed * dt;
 
     float yaw = degToRad(playerYaw);
-    Vec3 forward = { std::sin(yaw), 0.0f, -std::cos(yaw) };
+    Vec3 forward = { -std::sin(yaw), 0.0f, -std::cos(yaw) };
     Vec3 right   = { std::cos(yaw), 0.0f,  std::sin(yaw) };
 
     float moveX = 0.0f, moveZ = 0.0f;
