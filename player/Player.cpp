@@ -17,7 +17,7 @@ void updatePlayer(float dt) {
 
     float yaw = degToRad(playerYaw);
     Vec3 forward = { -std::sin(yaw), 0.0f, -std::cos(yaw) };
-    Vec3 right   = { std::cos(yaw), 0.0f,  std::sin(yaw) };
+    Vec3 right   = { std::cos(yaw), 0.0f,  -std::sin(yaw) }; // swap (x,z) to (-z,x) to rotate 90deg clockwise
 
     float moveX = 0.0f, moveZ = 0.0f;
     if (keys['w'] || keys['W']) { moveX += forward.x; moveZ += forward.z; }
