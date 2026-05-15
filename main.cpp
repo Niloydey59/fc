@@ -24,7 +24,6 @@ void display() {
     setupLighting();
 
     drawStadium();
-    drawLightPoles();
     drawPlayer();
     drawBall();
     drawHUD();

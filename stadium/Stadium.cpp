@@ -56,7 +56,7 @@ static void drawGrass() {
     // 1. Flat dark-green base for the full outer grass area
     glColor3f(0.15f, 0.45f, 0.15f);
     glBegin(GL_QUADS);
-        glNormal3f(0, 1, 0);
+        glNormal3f(0, 1, 0); // normal vector to surface,used for lighting but not visible here as lighting is off.
         glVertex3f(-GW, 0.0f, -GL);
         glVertex3f( GW, 0.0f, -GL);
         glVertex3f( GW, 0.0f,  GL);
@@ -184,6 +184,7 @@ static void drawFieldLines() {
     arcXZ( FW,  FL, CORNER_R,  PI,        PI * 1.5f,  y);
 
     glLineWidth(1.0f);
+    glPointSize(1.0f);
     glEnable(GL_LIGHTING);
 }
 
@@ -237,14 +238,6 @@ static void drawGoal(float goalLineZ, float sign) {
     glEnable(GL_LIGHTING);
 }
 
-// ── Public entry points ──────────────────────────────────────
-void drawStadium() {
-    drawGrass();
-    drawFieldLines();
-    drawGoal(-FL, +1.0f);
-    drawGoal( FL, -1.0f);
-}
-
 static void drawFloodlight(float x, float z) {
     const float POLE_H  = 18.0f;
     const float ARM_LEN = 3.0f;
@@ -266,7 +259,7 @@ static void drawFloodlight(float x, float z) {
     glPopMatrix();
 
     glDisable(GL_LIGHTING);
-    glColor3f(1.0f, 0.95f, 0.75f);
+    glColor3f(1.0f, 1.0f, 1.0f);
     glPushMatrix(); glTranslatef(-ARM_LEN, -0.4f, 0.0f); glutSolidSphere(0.45f, 10, 10); glPopMatrix();
     glPushMatrix(); glTranslatef( ARM_LEN, -0.4f, 0.0f); glutSolidSphere(0.45f, 10, 10); glPopMatrix();
     glEnable(GL_LIGHTING);
@@ -282,3 +275,14 @@ void drawLightPoles() {
     drawFloodlight(-ox,  oz);
     drawFloodlight( ox,  oz);
 }
+
+// ── Public entry points ──────────────────────────────────────
+void drawStadium() {
+    drawGrass();
+    drawFieldLines();
+    drawGoal(-FL, +1.0f);
+    drawGoal( FL, -1.0f);
+    drawLightPoles();
+}
+
+
