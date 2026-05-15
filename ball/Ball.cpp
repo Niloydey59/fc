@@ -1,5 +1,6 @@
 #include "Ball.h"
 #include "../globals/Globals.h"
+#include "../stadium/Stadium.h"
 #include <GL/freeglut.h>
 #include <cmath>
 
@@ -53,16 +54,29 @@ void updateBall(float dt) { // dynamic enity, updated through game manager
         kickCharge = 0.0f;
     }
     if (!ball.attached) {
+        // 1. Update position
         ball.pos.x += ball.vel.x * dt;
         ball.pos.y += ball.vel.y * dt;
         ball.pos.z += ball.vel.z * dt;
-        ball.vel.y -= 12.0f * dt;   // gravity
+
+        // 2. Gravity
+        ball.vel.y -= 12.0f * dt;
+
+        // 3. Ground bounce
         if (ball.pos.y <= ball.radius) {
-            ball.pos.y = ball.radius;
-            ball.vel.y *= -0.4f;    // bounce with damping
-            ball.vel.x *= 0.85f;    // ground friction
-            ball.vel.z *= 0.85f;
+            ball.pos.y  =  ball.radius;
+            ball.vel.y *= -0.4f;
+            ball.vel.x *=  0.85f;
+            ball.vel.z *=  0.85f;
         }
+        
+        // 4. Wall bounce (X and Z)
+        float bx = FIELD_HALF_WIDTH  - ball.radius;
+        float bz = FIELD_HALF_LENGTH - ball.radius;
+        if (ball.pos.x < -bx) { ball.pos.x = -bx; ball.vel.x *= -0.5f; }
+        if (ball.pos.x >  bx) { ball.pos.x =  bx; ball.vel.x *= -0.5f; }
+        if (ball.pos.z < -bz) { ball.pos.z = -bz; ball.vel.z *= -0.5f; }
+        if (ball.pos.z >  bz) { ball.pos.z =  bz; ball.vel.z *= -0.5f; }
     }
 }
 
