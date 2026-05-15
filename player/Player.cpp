@@ -46,6 +46,7 @@ void updatePlayer(float dt) {
 
 // ── Rendering ────────────────────────────────────────────────
 void drawPlayer() {
+    if(cameraMode == 2) return;
     glPushMatrix();
     glTranslatef(playerPos.x, playerPos.y, playerPos.z);
     glRotatef(playerYaw, 0, 1, 0);

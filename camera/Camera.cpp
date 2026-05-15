@@ -35,9 +35,9 @@ void updateCamera() {
         float eyeY = playerPos.y + 1.55f;
         float eyeZ = playerPos.z;
 
-        float lookX = eyeX + std::sin(yaw) * 12.0f;
-        float lookY = eyeY;
-        float lookZ = eyeZ - std::cos(yaw) * 12.0f;
+        float lookX = eyeX + (-std::sin(yaw)) * 12.0f;
+        float lookY = eyeY + std::sin(degToRad(cameraPitch)) * 12.0f;
+        float lookZ = eyeZ + (-std::cos(yaw)) * 12.0f;
 
         gluLookAt(
             eyeX, eyeY, eyeZ,
