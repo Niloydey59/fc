@@ -1,6 +1,7 @@
 #include "Ball.h"
 #include "../globals/Globals.h"
 #include "../stadium/Stadium.h"
+#include "../game_manager/GameManager.h"
 #include <GL/freeglut.h>
 #include <cmath>
 
@@ -69,6 +70,27 @@ void updateBall(float dt) { // dynamic enity, updated through game manager
             ball.vel.x *=  0.85f;
             ball.vel.z *=  0.85f;
         }
+
+        //4. Goal check
+        if (ball.pos.z < -FIELD_HALF_LENGTH+ball.radius+2.00f) //North Goal
+        {
+            if(abs(ball.pos.x)<3.66 && ball.pos.y<2.44)
+            {
+                homeScore++;
+                initBall();
+                respawnPlayer();
+            }
+        }
+        if (ball.pos.z > FIELD_HALF_LENGTH-ball.radius-2.00f) //South Goal
+        {
+            if(abs(ball.pos.x)<3.66 && ball.pos.y<2.44)
+            {
+                awayScore++;
+                initBall();
+                respawnPlayer();
+            }
+        }
+
         
         // 4. Wall bounce (X and Z)
         float bx = FIELD_HALF_WIDTH  - ball.radius;
